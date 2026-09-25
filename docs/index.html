@@ -476,6 +476,51 @@
     <p class="site-footer__word" aria-hidden="true">Полис</p>
   </footer>
 
+  <!-- Телефонный док: «лифт» по разделам + «заявка». Включается скриптом только на узких экранах -->
+  <div class="dock" data-dock hidden>
+    <nav class="lift" aria-label="Этажи страницы" data-lift>
+      <div class="lift__loupe" aria-hidden="true" data-lift-loupe>
+        <span class="lift__loupe-cap">этаж</span>
+        <span class="lift__loupe-num" data-loupe-num>±0</span>
+        <span class="lift__loupe-name" data-loupe-name>Главная</span>
+      </div>
+      <ol class="lift__floors" role="list">
+        <li><button class="lift__floor" type="button" data-floor="top"><span class="lift__num">±0</span><span class="lift__name">Главная</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+        <li><button class="lift__floor" type="button" data-floor="about"><span class="lift__num">01</span><span class="lift__name">О&nbsp;компании</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+        <li><button class="lift__floor" type="button" data-floor="services"><span class="lift__num">02</span><span class="lift__name">Услуги</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+        <li><button class="lift__floor" type="button" data-floor="catalog"><span class="lift__num">03</span><span class="lift__name">Каталог</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+        <li><button class="lift__floor" type="button" data-floor="partners"><span class="lift__num">04</span><span class="lift__name">Партнёры</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+        <li><button class="lift__floor" type="button" data-floor="contacts"><span class="lift__num">05</span><span class="lift__name">Контакты</span><span class="lift__bar" aria-hidden="true"></span></button></li>
+      </ol>
+    </nav>
+    <button class="dock__cart" type="button" aria-haspopup="dialog" aria-controls="cart" data-cart-open>
+      <span class="dock__cart-label">Заявка</span>
+      <span class="dock__count" data-cart-count>0</span>
+    </button>
+  </div>
+
+  <div class="sheet" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden data-sheet>
+    <div class="sheet__backdrop" data-sheet-close></div>
+    <div class="sheet__panel" data-sheet-panel>
+      <div class="sheet__grip" data-sheet-grip aria-hidden="true"><span></span></div>
+      <div class="sheet__head">
+        <span class="eyebrow"><span class="idx">(↳)</span> Смета к&nbsp;расчёту</span>
+        <h2 class="display sheet__title" id="cart-title">Заявка <em data-cart-total></em></h2>
+        <button class="sheet__x" type="button" aria-label="Закрыть" data-sheet-close>×</button>
+      </div>
+      <p class="sheet__empty" data-cart-empty>Пока пусто. Коснитесь услуги или категории каталога&nbsp;— или смахните строку услуги вправо.</p>
+      <ol class="sheet__list" role="list" data-cart-list></ol>
+      <div class="sheet__actions">
+        <a class="btn" href="mailto:info@polis-stroy.ru" data-cart-mail>Отправить письмом <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="tel:+79684880973">Позвонить</a>
+        <div class="sheet__minor">
+          <button class="chip-btn" type="button" data-cart-copy>Скопировать список</button>
+          <button class="sheet__clear" type="button" data-cart-clear>Очистить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" role="status" aria-live="polite" data-toast></div>
 </body>
 </html>
