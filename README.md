@@ -7,31 +7,31 @@
 
 ## Лендинг
 
-Статичная одностраничная версия: все разделы (о компании, услуги, каталог, партнёры, контакты) на `index.html` с якорной навигацией. Без сборки и зависимостей.
+Статичная одностраничная версия: все разделы (о компании, услуги, каталог, партнёры, контакты) на `docs/index.html` (папка, из которой публикует GitHub Pages) с якорной навигацией. Без сборки и зависимостей.
 
 ```
-index.html              разметка, SEO-метаданные, JSON-LD (GeneralContractor)
-assets/css/style.css    стили, mobile-first (брейкпоинты 48em и 68em)
-assets/js/main.js       меню, шапка, появление блоков, тема письма, копирование e-mail
-assets/fonts/           Playfair Display, Geologica, IBM Plex Mono — woff2, cyrillic + latin (OFL)
-assets/img/catalog/     картинки категорий со старого сайта (WebP)
-assets/img/og-image.jpg превью для соцсетей 1200×630
-favicon.svg, robots.txt, sitemap.xml
+docs/index.html              разметка, SEO-метаданные, JSON-LD (GeneralContractor)
+docs/assets/css/style.css    стили, mobile-first (брейкпоинты 48em и 68em)
+docs/assets/js/main.js       меню, шапка, появление блоков, тема письма, копирование e-mail
+docs/assets/fonts/           Playfair Display, Geologica, IBM Plex Mono — woff2, cyrillic + latin (OFL)
+docs/assets/img/catalog/     картинки категорий со старого сайта (WebP)
+docs/assets/img/og-image.jpg превью для соцсетей 1200×630
+docs/favicon.svg, robots.txt, sitemap.xml
 ```
 
 ## Запуск
 
 ```sh
-python3 -m http.server 8080
-# или: npx serve .
+python3 -m http.server 8080 -d docs
+# или: npx serve docs
 ```
 
 Открыть http://localhost:8080/.
 
 ## Дизайн
 
-- Палитра — токены в `:root` (`assets/css/style.css`): графит `--ink`, кремовый `--paper`, единственный акцент `--accent` (лайм). Сменить акцент — одна переменная.
-- Логотип (три башни с «ПОЛИС») перерисован из старого `logo.svg` в палитру сайта: SVG-символ `#mark` в `index.html`, он же — чертёж на первом экране.
+- Палитра — токены в `:root` (`docs/assets/css/style.css`): графит `--ink`, кремовый `--paper`, единственный акцент `--accent` (лайм). Сменить акцент — одна переменная.
+- Логотип (три башни с «ПОЛИС») перерисован из старого `logo.svg` в палитру сайта: SVG-символ `#mark` в `docs/index.html`, он же — чертёж на первом экране.
 - Картинки категорий показаны в ч/б с `mix-blend-mode: multiply`, поэтому белый фон исходников растворяется в кремовом.
 - Анимации отключаются при `prefers-reduced-motion`; без JS весь контент виден и ссылки работают.
 
