@@ -1447,7 +1447,6 @@ html.menu-open { overflow: hidden; }
   .js .about__statement[data-reveal].is-in mark { background-size: 100% 0.14em; }
 
   .marquee__track { animation: marquee 38s linear infinite; }
-  .marquee:hover .marquee__track { animation-play-state: paused; }
 
   @supports (animation-timeline: scroll()) {
     .progress {
