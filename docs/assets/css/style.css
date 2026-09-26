@@ -965,6 +965,53 @@ html.menu-open { overflow: hidden; }
   -webkit-text-stroke: 1.5px var(--ink);
 }
 
+/* ---------- Clients ---------- */
+.clients__grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+.clients__title {
+  font-size: clamp(2.6rem, 7.6vw, 7.5rem);
+  line-height: 0.9;
+}
+.clients__title em { font-style: italic; }
+
+.clients__list {
+  margin: 0;
+  border-top: 1.5px solid var(--ink);
+}
+.client {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  column-gap: 0.75rem;
+  row-gap: 0.6rem;
+  padding: 1.35rem 0 1.5rem;
+  border-bottom: 1px solid rgb(18 18 18 / 0.2);
+}
+.client__num {
+  grid-row: span 2;
+  color: var(--muted-ink);
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.client__type {
+  color: var(--muted-ink);
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.client__name {
+  margin: 0;
+  font-family: var(--ff-display);
+  font-size: clamp(1.6rem, 2.9vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
 /* ---------- Contacts ---------- */
 .contacts__grid {
   display: grid;
@@ -1244,6 +1291,16 @@ html.menu-open { overflow: hidden; }
   }
   .partners__title { grid-column: 1 / 6; }
   .partners__text { grid-column: 6 / -1; }
+
+  .client {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 14rem);
+    align-items: baseline;
+    column-gap: var(--gap);
+    padding-block: 1.75rem 1.9rem;
+  }
+  .client__num { grid-row: auto; }
+  .client__name { grid-column: 2; grid-row: 1; }
+  .client__type { grid-column: 3; grid-row: 1; text-align: right; }
 }
 
 /* ==========================================================================
@@ -1382,6 +1439,15 @@ html.menu-open { overflow: hidden; }
   .partners__intro { grid-template-columns: repeat(12, minmax(0, 1fr)); }
   .partners__title { grid-column: 1 / 8; }
   .partners__text { grid-column: 9 / 13; padding-bottom: 0.4rem; }
+
+  /* Clients */
+  .clients__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+  }
+  .clients__title { grid-column: 1 / 6; font-size: clamp(2.6rem, 6vw, 6.5rem); }
+  .clients__list { grid-column: 6 / 13; }
+  .client { grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 13rem); }
 
   /* Contacts */
   .contacts__grid {
