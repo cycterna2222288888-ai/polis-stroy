@@ -488,7 +488,9 @@
      Чтобы ссылка, скопированная в середине прокрутки, вела в тот же раздел,
      а не всегда на #contacts. history.replaceState — не pushState: иначе
      каждый шаг скролла попадал бы в историю и кнопка «назад» листала бы
-     разделы вместо перехода на предыдущую страницу. */
+     разделы вместо перехода на предыдущую страницу. На самом верхнем блоке
+     (hero) хэш убирается совсем — «#top» в адресной строке выглядит как
+     нерабочая ссылка, а её отсутствие честно читается как «вы наверху». */
   if ('IntersectionObserver' in window) {
     const hashSections = [...document.querySelectorAll('main section[id]')];
     let hashCandidate = null;
@@ -500,8 +502,11 @@
     // где пользователь в итоге остановился.
     const applyHash = () => {
       if (!hashCandidate) return;
-      const next = `#${hashCandidate}`;
-      if (location.hash !== next) history.replaceState(history.state, '', next);
+      const isTop = hashCandidate === hashSections[0].id;
+      const next = isTop ? location.pathname + location.search : `#${hashCandidate}`;
+      if (isTop ? location.hash !== '' : location.hash !== next) {
+        history.replaceState(history.state, '', next);
+      }
     };
     const hashObserver = new IntersectionObserver((entries) => {
       const visible = entries.filter((e) => e.isIntersecting);
