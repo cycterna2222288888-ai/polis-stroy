@@ -484,6 +484,39 @@
     requestAnimationFrame(() => { trackFloor(); liftTick = false; });
   }, { passive: true });
 
+  /* ---------- Хэш в адресной строке следует за разделом на экране ----------
+     Чтобы ссылка, скопированная в середине прокрутки, вела в тот же раздел,
+     а не всегда на #contacts. history.replaceState — не pushState: иначе
+     каждый шаг скролла попадал бы в историю и кнопка «назад» листала бы
+     разделы вместо перехода на предыдущую страницу. */
+  if ('IntersectionObserver' in window) {
+    const hashSections = [...document.querySelectorAll('main section[id]')];
+    let hashCandidate = null;
+    let hashTimer = null;
+    // Пишем хэш только через паузу после того, как скролл затих: и при обычной
+    // прокрутке, и при плавном переезде к якорю (scroll-behavior: smooth) IO
+    // успевает отрапортовать про промежуточные разделы, пока страница ещё едет —
+    // применять хэш сразу писать значит ловить «пролетающий мимо» раздел, а не тот,
+    // где пользователь в итоге остановился.
+    const applyHash = () => {
+      if (!hashCandidate) return;
+      const next = `#${hashCandidate}`;
+      if (location.hash !== next) history.replaceState(history.state, '', next);
+    };
+    const hashObserver = new IntersectionObserver((entries) => {
+      const visible = entries.filter((e) => e.isIntersecting);
+      if (!visible.length) return;
+      visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      hashCandidate = visible[0].target.id;
+      clearTimeout(hashTimer);
+      hashTimer = setTimeout(applyHash, 250);
+    }, {
+      rootMargin: `-${header.offsetHeight}px 0px -60% 0px`,
+      threshold: 0,
+    });
+    hashSections.forEach((s) => hashObserver.observe(s));
+  }
+
   const goFloor = (i, smooth) => {
     window.scrollTo({ top: floorTop(i), behavior: smooth && !reduceMotion.matches ? 'smooth' : 'instant' });
   };
